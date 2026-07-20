@@ -6,7 +6,7 @@ import { ok } from "@/lib/http";
 
 const schema = z.object({
   stepCode: z.string().min(1),
-  payload: z.record(z.union([z.string(), z.boolean(), z.number(), z.null()])),
+  payload: z.record(z.string(), z.unknown()),
 });
 
 export async function POST(request: Request) {
@@ -18,7 +18,7 @@ export async function POST(request: Request) {
 
   const user = await requireRole(["STUDENT", "MERCHANT"]);
   const body = schema.parse(await request.json());
-  return ok(await completeOnboardingStep(user.id, body.stepCode, body.payload), {
+  return ok(await completeOnboardingStep(user.id, body.stepCode, body.payload as any), {
     status: 201,
   });
 }

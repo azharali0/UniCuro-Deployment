@@ -13,7 +13,7 @@ export const pushSubscriptionSchema = z.object({
 export const syncItemSchema = z.object({
   userId: z.string().min(1),
   action: z.string().min(2),
-  payload: z.record(z.unknown()).optional(),
+  payload: z.record(z.string(), z.unknown()).optional(),
 });
 
 export function shouldRetrySync(retryCount: number) {

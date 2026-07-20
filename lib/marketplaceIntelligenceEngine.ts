@@ -2,7 +2,7 @@ import { prisma } from "@/lib/prisma";
 
 export async function getMarketplaceDashboard(userId: string) {
   const [listings, orders, recommendations] = await Promise.all([
-    prisma.studentMarketplaceListing.findMany({ where: { active: true }, orderBy: { createdAt: "desc" } }),
+    prisma.studentMarketplaceListing.findMany({ where: { status: "LIVE" }, orderBy: { createdAt: "desc" } }),
     prisma.marketplaceOrder.findMany({ where: { OR: [{ buyerId: userId }, { sellerId: userId }] }, orderBy: { createdAt: "desc" } }),
     prisma.marketplaceRecommendation.findMany({ where: { userId }, orderBy: { score: "desc" } }),
   ]);
@@ -11,7 +11,7 @@ export async function getMarketplaceDashboard(userId: string) {
 
 export async function refreshMarketplaceRecommendations(userId: string) {
   const saved = await prisma.savedItem.findMany({ where: { userId } });
-  const listings = await prisma.studentMarketplaceListing.findMany({ where: { active: true } });
+  const listings = await prisma.studentMarketplaceListing.findMany({ where: { status: "LIVE" } });
   const savedTitles = saved.map((item) => item.title.toLowerCase());
   const results = [];
   for (const listing of listings) {

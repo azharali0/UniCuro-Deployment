@@ -23,8 +23,8 @@ export async function runAcademicTool(userId: string, input: {
   });
   await prisma.aiMessage.createMany({
     data: [
-      { conversationId: conversation.id, role: "USER", content: input.prompt },
-      { conversationId: conversation.id, role: "ASSISTANT", content },
+      { userId, conversationId: conversation.id, role: "USER", content: input.prompt },
+      { userId, conversationId: conversation.id, role: "ASSISTANT", content },
     ],
   });
 

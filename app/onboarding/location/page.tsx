@@ -8,11 +8,9 @@ export default async function Page() {
   const user = await requireRole(["STUDENT", "MERCHANT"]);
   const state = await getOnboardingState(user.id);
   const fields = [
-      { name: "countryCode", label: "Country", type: "select", required: true, defaultValue: state.profile.countryCode, options: (await listOnboardingOptions("country")).map((o) => ({ value: o.value, label: o.label })) },
-      { name: "languageCode", label: "Language", type: "select", required: true, defaultValue: state.profile.languageCode, options: (await listOnboardingOptions("language")).map((o) => ({ value: o.value, label: o.label })) },
-      { name: "currencyCode", label: "Currency", type: "select", required: true, defaultValue: state.profile.currencyCode, options: (await listOnboardingOptions("currency")).map((o) => ({ value: o.value, label: o.label })) },
-      { name: "timezone", label: "Timezone", type: "select", required: true, defaultValue: state.profile.timezone, options: (await listOnboardingOptions("timezone")).map((o) => ({ value: o.value, label: o.label })) },
-    ];
+      { name: "countryCode", label: "Primary Country", type: "select", required: true, defaultValue: state.profile.countryCode, options: await listOnboardingOptions("countries") },
+      { name: "timezone", label: "Timezone", type: "select", required: true, defaultValue: (state.profile as any).timezone || "Europe/London", options: await listOnboardingOptions("timezones") },
+    ] as any;
 
   return (
     <RuntimeOnboardingShell userId={user.id}>

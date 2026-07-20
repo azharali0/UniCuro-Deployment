@@ -7,7 +7,7 @@ import { getOnboardingState, listOnboardingOptions } from "@/lib/onboardingRunti
 export default async function Page() {
   const user = await requireRole(["STUDENT", "MERCHANT"]);
   const state = await getOnboardingState(user.id);
-  const fields = [];
+  const fields: any[] = [];
 
   return (
     <RuntimeOnboardingShell userId={user.id}>

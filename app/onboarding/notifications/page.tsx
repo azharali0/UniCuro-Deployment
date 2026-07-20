@@ -8,10 +8,9 @@ export default async function Page() {
   const user = await requireRole(["STUDENT", "MERCHANT"]);
   const state = await getOnboardingState(user.id);
   const fields = [
-      { name: "notificationEmail", label: "Email notifications", type: "checkbox", defaultValue: state.profile.notificationEmail },
-      { name: "notificationPush", label: "Push notifications", type: "checkbox", defaultValue: state.profile.notificationPush },
-      { name: "notificationInApp", label: "In-app notifications", type: "checkbox", defaultValue: state.profile.notificationInApp },
-    ];
+      { name: "marketingConsent", label: "Receive marketing and offers", type: "checkbox", defaultValue: (state.profile as any).marketingConsent },
+      { name: "systemNotifications", label: "Receive system and security alerts", type: "checkbox", defaultValue: (state.profile as any).systemNotifications },
+    ] as any;
 
   return (
     <RuntimeOnboardingShell userId={user.id}>

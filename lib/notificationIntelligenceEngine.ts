@@ -22,7 +22,7 @@ export async function dispatchNotification(userId: string, input: {
   channels: Array<"IN_APP" | "EMAIL" | "SMS" | "PUSH">;
 }) {
   const notification = await prisma.notification.create({
-    data: { userId, title: input.title, body: input.body, type: "SYSTEM", read: false },
+    data: { userId, title: input.title, body: input.body, category: "SYSTEM", read: false },
   });
 
   const results: any[] = [];

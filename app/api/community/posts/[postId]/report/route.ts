@@ -6,10 +6,11 @@ import { ok } from "@/lib/http";
 
 const schema = z.object({ reason: z.string().min(2) });
 
-export async function POST(request: Request, { params }: { params: { postId: string } }) {
+export async function POST(request: Request, props: { params: Promise<{ postId: string }> }) {
+  const { postId } = await props.params;
   await recordApiRequest({ endpoint: "/api/community/posts/:postId/report", method: "POST", status: "REQUEST_RECEIVED" });
   const user = await requireRole(["STUDENT", "MERCHANT", "ADMIN", "SUPER_ADMIN"]);
   const { reason } = schema.parse(await request.json());
-  const report = await reportCommunityPost(user.id, params.postId, reason);
+  const report = await reportCommunityPost(user.id, postId, reason);
   return ok({ report }, { status: 201 });
 }

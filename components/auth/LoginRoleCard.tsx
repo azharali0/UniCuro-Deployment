@@ -50,9 +50,9 @@ export function LoginRoleCard({ role }: { role: Role }) {
         <h1 className="text-4xl font-black">{cfg.title}</h1>
         <p className="mt-3 text-slate-600 leading-7">{cfg.subtitle}</p>
         <label className="mt-8 block text-sm font-black">Email</label>
-        <input value={email} onChange={(e) => setEmail(e.target.value)} className="mt-2 w-full rounded-2xl border p-4" production configuration="you@example.com" />
+        <input value={email} onChange={(e) => setEmail(e.target.value)} className="mt-2 w-full rounded-2xl border p-4" placeholder="you@example.com" />
         <label className="mt-4 block text-sm font-black">{role === "student" ? "OTP code if required" : "MFA code"}</label>
-        <input value={otp} onChange={(e) => setOtp(e.target.value)} className="mt-2 w-full rounded-2xl border p-4" production configuration="123456" />
+        <input value={otp} onChange={(e) => setOtp(e.target.value)} className="mt-2 w-full rounded-2xl border p-4" placeholder="123456" />
         {error && <p className="mt-4 rounded-2xl bg-red-50 p-3 text-red-700 font-bold">{error}</p>}
         <button onClick={submit} className={`mt-6 w-full rounded-2xl px-5 py-4 font-black ${cfg.color}`}>Continue</button>
       </section>

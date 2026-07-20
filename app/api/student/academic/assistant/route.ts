@@ -16,12 +16,12 @@ export async function POST(request: Request) {
 
   const result = await askAcademicAssistant(user.id, question);
 
-  if (result.ok && result.answer) {
-    await recordAiMessage({ conversationId: conversation.id, userId: user.id, role: "assistant", content: result.answer, model: process.env.AI_MODEL_DEFAULT || "gpt-4o-mini" });
-    await recordTokenLedger({ userId: user.id, provider: "openai", model: process.env.AI_MODEL_DEFAULT || "gpt-4o-mini", inputTokens: Math.ceil(question.length / 4), outputTokens: Math.ceil(result.answer.length / 4) });
+  if (!result.blocked && result.response) {
+    await recordAiMessage({ conversationId: conversation.id, userId: user.id, role: "assistant", content: result.response, model: process.env.AI_MODEL_DEFAULT || "gpt-4o-mini" });
+    await recordTokenLedger({ userId: user.id, provider: "openai", model: process.env.AI_MODEL_DEFAULT || "gpt-4o-mini", inputTokens: Math.ceil(question.length / 4), outputTokens: Math.ceil(result.response.length / 4) });
   }
 
-  return NextResponse.json({ ...result, conversationId: conversation.id }, { status: result.ok ? 200 : 428 });
+  return NextResponse.json({ ...result, conversationId: conversation.id }, { status: !result.blocked ? 200 : 428 });
 }
 
 export async function GET() {

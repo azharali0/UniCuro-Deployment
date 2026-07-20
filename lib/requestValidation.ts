@@ -1,5 +1,5 @@
 import { z } from "zod";
-const jsonObjectSchema = z.record(z.unknown());
+const jsonObjectSchema = z.record(z.string(), z.unknown());
 export async function parseJsonObject(request: Request) {
   const contentType = request.headers.get("content-type") || "";
   if (!contentType.includes("application/json")) throw new Error("UNSUPPORTED_CONTENT_TYPE");

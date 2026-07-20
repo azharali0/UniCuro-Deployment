@@ -104,6 +104,7 @@
     "@playwright/test": "latest",
     "@testing-library/jest-dom": "latest",
     "@testing-library/react": "latest",
+    "@types/web-push": "^3.6.4",
     "vitest": "latest"
   },
   "name": "unisphere-university-pilot-launch-program",

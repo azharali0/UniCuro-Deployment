@@ -8,9 +8,12 @@ export default async function Page() {
   const user = await requireRole(["STUDENT", "MERCHANT"]);
   const state = await getOnboardingState(user.id);
   const fields = [
-      { name: "aiSupportLevel", label: "AI support level", type: "select", required: true, defaultValue: state.profile.aiSupportLevel, options: (await listOnboardingOptions("ai_support_level")).map((o) => ({ value: o.value, label: o.label })) },
-      { name: "aiDailyReminder", label: "Enable daily AI study reminders", type: "checkbox", defaultValue: state.profile.aiDailyReminder },
-    ];
+      { name: "aiStudyEnabled", label: "Enable AI Study Assistant", type: "checkbox", defaultValue: (state.profile as any).aiStudyEnabled },
+      { name: "preferredAiModel", label: "Preferred AI Model", type: "select", required: true, defaultValue: (state.profile as any).preferredAiModel, options: [
+        { value: "gpt-4o-mini", label: "Fast (Default)" },
+        { value: "gpt-4o", label: "Advanced (Premium)" },
+      ]},
+    ] as any;
 
   return (
     <RuntimeOnboardingShell userId={user.id}>

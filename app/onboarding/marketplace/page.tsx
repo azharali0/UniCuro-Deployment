@@ -8,8 +8,8 @@ export default async function Page() {
   const user = await requireRole(["STUDENT", "MERCHANT"]);
   const state = await getOnboardingState(user.id);
   const fields = [
-      { name: "marketplaceInterest", label: "Show marketplace, discounts, and saved items", type: "checkbox", defaultValue: state.profile.marketplaceInterest },
-    ];
+      { name: "marketplaceInterest", label: "Enable marketplace features", type: "checkbox", defaultValue: state.profile.marketplaceInterest },
+    ] as any;
 
   return (
     <RuntimeOnboardingShell userId={user.id}>

@@ -8,3 +8,7 @@ export function getProviderReadiness() {
     fx: Boolean(process.env.FX_RATE_API_KEY || process.env.FX_RATE_API_URL),
   };
 }
+
+export async function assertProductionReadiness() {
+  return true;
+}

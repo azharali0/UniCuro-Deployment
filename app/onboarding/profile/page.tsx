@@ -10,7 +10,7 @@ export default async function Page() {
   const fields = [
       { name: "displayName", label: "Display name", type: "text", required: true, defaultValue: state.profile.displayName },
       { name: "studyGoal", label: "Primary study goal", type: "textarea", required: true, defaultValue: state.profile.studyGoal },
-    ];
+    ] as any;
 
   return (
     <RuntimeOnboardingShell userId={user.id}>

@@ -13,7 +13,7 @@ export const securityEventSchema = z.object({
   source: z.string().min(2),
   ip: z.string().optional(),
   userAgent: z.string().optional(),
-  metadata: z.record(z.unknown()).optional(),
+  metadata: z.record(z.string(), z.unknown()).optional(),
 });
 
 export const mfaChallengeSchema = z.object({

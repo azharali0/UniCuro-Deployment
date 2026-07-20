@@ -25,10 +25,7 @@ export async function refreshCareerMatches(userId: string) {
       score += 35;
       reasons.push("Target role match");
     }
-    if (profile?.countryCode && opportunity.countryCode === profile.countryCode) {
-      score += 15;
-      reasons.push("Country match");
-    }
+
     results.push(await prisma.careerOpportunityMatch.upsert({
       where: { userId_opportunityId: { userId, opportunityId: opportunity.id } },
       update: { score, reasons },

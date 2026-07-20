@@ -12,7 +12,7 @@ export type NotificationPayload = {
 
 export async function createInAppNotification(payload: NotificationPayload) {
   const notification = await prisma.notification.create({
-    data: { userId: payload.userId, title: payload.title, body: payload.body, channel: "IN_APP" },
+    data: { userId: payload.userId, title: payload.title, body: payload.body, category: "ALERT" },
   });
   return { ok: true, notification };
 }
@@ -30,7 +30,7 @@ export async function sendEmailNotification(payload: NotificationPayload) {
 
 export async function sendPushNotification(payload: NotificationPayload) {
   const notification = await prisma.notification.create({
-    data: { userId: payload.userId, title: payload.title, body: payload.body, channel: "PUSH" },
+    data: { userId: payload.userId, title: payload.title, body: payload.body, category: "ALERT" },
   });
   const pushResults = await sendPushToUser(payload.userId, { title: payload.title, body: payload.body });
   return { ok: true, notification, pushResults };

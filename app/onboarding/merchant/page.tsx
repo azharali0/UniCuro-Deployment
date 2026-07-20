@@ -8,8 +8,8 @@ export default async function Page() {
   const user = await requireRole(["STUDENT", "MERCHANT"]);
   const state = await getOnboardingState(user.id);
   const fields = [
-      { name: "merchantInterested", label: "Enable merchant tab", type: "checkbox", defaultValue: state.profile.merchantInterested },
-    ];
+      { name: "merchantInterested", label: "Enable merchant tools", type: "checkbox", defaultValue: state.profile.merchantInterested },
+    ] as any;
 
   return (
     <RuntimeOnboardingShell userId={user.id}>

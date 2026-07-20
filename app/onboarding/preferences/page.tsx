@@ -10,7 +10,7 @@ export default async function Page() {
   const fields = [
       { name: "marketplaceInterest", label: "Enable marketplace and student deals", type: "checkbox", defaultValue: state.profile.marketplaceInterest },
       { name: "merchantInterested", label: "Enable merchant setup and selling tools", type: "checkbox", defaultValue: state.profile.merchantInterested },
-    ];
+    ] as any;
 
   return (
     <RuntimeOnboardingShell userId={user.id}>

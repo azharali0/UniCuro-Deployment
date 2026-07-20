@@ -9,10 +9,10 @@ export async function sendEmail(input: { userId?: string; to: string; subject: s
   if (!from) throw new Error("EMAIL_FROM_NOT_CONFIGURED");
   try {
     const result = await resend.emails.send({ from, to: input.to, subject: input.subject, html: input.html });
-    await prisma.emailDelivery.create({ data: { userId: input.userId, recipient: input.to, templateKey: input.templateKey, status: "SENT", providerId: result.data?.id || null } });
+    await prisma.emailDelivery.create({ data: { userId: input.userId, toEmail: input.to, subject: input.subject, templateKey: input.templateKey, status: "SENT", providerId: result.data?.id || null } });
     return result;
   } catch (error: any) {
-    await prisma.emailDelivery.create({ data: { userId: input.userId, recipient: input.to, templateKey: input.templateKey, status: "FAILED", error: String(error?.message || error) } });
+    await prisma.emailDelivery.create({ data: { userId: input.userId, toEmail: input.to, subject: input.subject, templateKey: input.templateKey, status: "FAILED", error: String(error?.message || error) } });
     throw error;
   }
 }
