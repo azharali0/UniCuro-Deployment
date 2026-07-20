@@ -3,7 +3,7 @@ import { prisma } from "@/lib/prisma";
 
 if (process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY && process.env.VAPID_PRIVATE_KEY) {
   webpush.setVapidDetails(
-    process.env.VAPID_SUBJECT || "mailto:support@unisphere.app",
+    process.env.VAPID_SUBJECT || "mailto:support@unicuro.app",
     process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY,
     process.env.VAPID_PRIVATE_KEY
   );

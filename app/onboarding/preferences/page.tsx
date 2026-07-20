@@ -16,7 +16,7 @@ export default async function Page() {
     <RuntimeOnboardingShell userId={user.id}>
       <section className="grid gap-6 lg:grid-cols-[0.8fr_1.2fr]">
         <div className="rounded-3xl border border-slate-200 bg-white p-8">
-          <h2 className="text-4xl font-black">Choose your UniSphere experience</h2>
+          <h2 className="text-4xl font-black">Choose your UniCuro experience</h2>
           <p className="mt-4 leading-8 text-slate-600">Decide which major student tools should be activated for your account.</p>
         </div>
         <RuntimeOnboardingForm

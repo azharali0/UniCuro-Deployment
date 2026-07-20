@@ -29,7 +29,7 @@ export function DynamicPricingCard() {
   return (
     <section className="rounded-[32px] border bg-white p-8 shadow-sm dark:bg-slate-900 dark:text-white">
       <p className="text-sm font-black uppercase text-emerald-600">Dynamic Global Pricing</p>
-      <h2 className="mt-2 text-3xl font-black">UniSphere Premium</h2>
+      <h2 className="mt-2 text-3xl font-black">UniCuro Premium</h2>
       <p className="mt-3 text-slate-600 dark:text-slate-300">Base price is USD. Students see the equivalent in their local currency.</p>
 
       <div className="mt-6 grid gap-4 md:grid-cols-3">

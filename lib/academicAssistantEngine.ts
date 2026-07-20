@@ -12,7 +12,7 @@ export async function runAcademicTool(userId: string, input: {
   const result = await callOpenAI([
     {
       role: "system",
-      content: `You are UniSphere Academic Assistant. Tool: ${input.tool}. Help the student learn and structure their own work. Never create assessed submission-ready work.`,
+      content: `You are UniCuro Academic Assistant. Tool: ${input.tool}. Help the student learn and structure their own work. Never create assessed submission-ready work.`,
     },
     { role: "user", content: input.prompt },
   ]);

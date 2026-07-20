@@ -12,9 +12,9 @@ export async function POST(request: Request) {
   const requested = data.next || "/super-admin";
   const redirectTo = canRoleAccessPath("SUPER_ADMIN" as any, requested) ? requested : "/super-admin";
   const res = NextResponse.json({ ok:true, role:"SUPER_ADMIN", redirectTo });
-  res.cookies.set("unisphere_role", "SUPER_ADMIN", { httpOnly:true, sameSite:"lax", path:"/" });
-  res.cookies.set("unisphere_email", data.email, { httpOnly:true, sameSite:"lax", path:"/" });
-  res.cookies.set("unisphere_user_id", `${data.email}-super-admin`, { httpOnly:true, sameSite:"lax", path:"/" });
-  res.cookies.set("unisphere_mfa", "true", { httpOnly:true, sameSite:"lax", path:"/" });
+  res.cookies.set("unicuro_role", "SUPER_ADMIN", { httpOnly:true, sameSite:"lax", path:"/" });
+  res.cookies.set("unicuro_email", data.email, { httpOnly:true, sameSite:"lax", path:"/" });
+  res.cookies.set("unicuro_user_id", `${data.email}-super-admin`, { httpOnly:true, sameSite:"lax", path:"/" });
+  res.cookies.set("unicuro_mfa", "true", { httpOnly:true, sameSite:"lax", path:"/" });
   return res;
 }

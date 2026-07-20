@@ -1,21 +1,21 @@
 import { cookies } from "next/headers";
-import { UniSphereRole } from "./access-control";
+import { UniCuroRole } from "./access-control";
 
-export async function getUniSphereSession() {
+export async function getUniCuroSession() {
   const store = await cookies();
-  const role = store.get("unisphere_role")?.value as UniSphereRole | undefined;
+  const role = store.get("unicuro_role")?.value as UniCuroRole | undefined;
   if (!role) return null;
 
   return {
-    id: store.get("unisphere_user_id")?.value || "session-user",
-    email: store.get("unisphere_email")?.value || "user@unisphere.local",
+    id: store.get("unicuro_user_id")?.value || "session-user",
+    email: store.get("unicuro_email")?.value || "user@unicuro.com",
     role,
-    mfaVerified: store.get("unisphere_mfa")?.value === "true",
+    mfaVerified: store.get("unicuro_mfa")?.value === "true",
   };
 }
 
-export async function requireRole(roles: UniSphereRole[]) {
-  const session = await getUniSphereSession();
+export async function requireRole(roles: UniCuroRole[]) {
+  const session = await getUniCuroSession();
   if (!session || !roles.includes(session.role)) {
     throw new Error("UNAUTHORIZED_ROLE");
   }

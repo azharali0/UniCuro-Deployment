@@ -9,6 +9,6 @@ export async function POST(request: Request) {
   const body = schema.parse(await request.json());
   const user = await registerUser(body);
   const { code } = await createAuthCode(user.id, "EMAIL_VERIFICATION");
-  await sendEmail({ userId: user.id, to: user.email, subject: "Verify your UniSphere account", html: `<p>Your verification code is <strong>${code}</strong>.</p>`, templateKey: "EMAIL_VERIFICATION" });
+  await sendEmail({ userId: user.id, to: user.email, subject: "Verify your UniCuro account", html: `<p>Your verification code is <strong>${code}</strong>.</p>`, templateKey: "EMAIL_VERIFICATION" });
   return ok({ userId: user.id }, { status: 201 });
 }

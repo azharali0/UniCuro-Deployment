@@ -12,10 +12,10 @@ export async function POST(request: Request) {
   const user = await prisma.userAccount.findUnique({ where: { id: body.userId } });
   if (!user) throw new Error("USER_NOT_FOUND");
   const { code } = await createAuthCode(user.id, "MFA");
-  if (body.channel === "EMAIL") await sendEmail({ userId: user.id, to: user.email, subject: "Your UniSphere MFA code", html: `<p>${code}</p>`, templateKey: "MFA" });
+  if (body.channel === "EMAIL") await sendEmail({ userId: user.id, to: user.email, subject: "Your UniCuro MFA code", html: `<p>${code}</p>`, templateKey: "MFA" });
   else {
     if (!user.phoneNumber) throw new Error("PHONE_NOT_CONFIGURED");
-    await sendSms({ userId: user.id, to: user.phoneNumber, body: `Your UniSphere MFA code is ${code}`, templateKey: "MFA" });
+    await sendSms({ userId: user.id, to: user.phoneNumber, body: `Your UniCuro MFA code is ${code}`, templateKey: "MFA" });
   }
   return ok({ sent: true });
 }

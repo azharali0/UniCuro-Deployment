@@ -1,20 +1,20 @@
-export type UniSphereRole = "STUDENT" | "MERCHANT" | "ADMIN" | "SUPER_ADMIN";
+export type UniCuroRole = "STUDENT" | "MERCHANT" | "ADMIN" | "SUPER_ADMIN";
 
-export const roleHome: Record<UniSphereRole, string> = {
+export const roleHome: Record<UniCuroRole, string> = {
   STUDENT: "/student",
   MERCHANT: "/student/merchant",
   ADMIN: "/admin",
   SUPER_ADMIN: "/super-admin",
 };
 
-export const allowedRolePaths: Record<UniSphereRole, string[]> = {
+export const allowedRolePaths: Record<UniCuroRole, string[]> = {
   STUDENT: ["/student", "/onboarding", "/support"],
   MERCHANT: ["/student", "/student/merchant", "/onboarding", "/support"],
   ADMIN: ["/admin", "/support"],
   SUPER_ADMIN: ["/super-admin", "/support"],
 };
 
-export function canRoleAccessPath(role: UniSphereRole, pathname: string) {
+export function canRoleAccessPath(role: UniCuroRole, pathname: string) {
   return allowedRolePaths[role].some((prefix) => pathname === prefix || pathname.startsWith(prefix + "/"));
 }
 
@@ -28,6 +28,6 @@ export function loginPathFor(pathname: string) {
   return "/login/student";
 }
 
-export function requiresMfa(role: UniSphereRole) {
+export function requiresMfa(role: UniCuroRole) {
   return role === "ADMIN" || role === "SUPER_ADMIN";
 }

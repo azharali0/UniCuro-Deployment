@@ -27,7 +27,7 @@ export async function sendTemplatedEmail(input: {
 
   try {
     const result = await resend.emails.send({
-      from: process.env.FROM_EMAIL || "UniSphere <hello@unisphere.app>",
+      from: process.env.FROM_EMAIL || "UniCuro <hello@unicuro.com>",
       to: input.toEmail,
       subject: template.subject,
       html: template.html,

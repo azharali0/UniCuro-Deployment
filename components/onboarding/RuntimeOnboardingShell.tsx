@@ -18,13 +18,13 @@ export async function RuntimeOnboardingShell({
           <div className="flex flex-wrap items-start justify-between gap-4">
             <div>
               <p className="text-sm font-black uppercase tracking-wide text-emerald-700">
-                UniSphere onboarding
+                UniCuro onboarding
               </p>
               <h1 className="mt-2 text-3xl font-black">
                 Set up your student operating system
               </h1>
               <p className="mt-2 max-w-2xl text-slate-600">
-                Your answers are stored in UniSphere and used to personalise pricing,
+                Your answers are stored in UniCuro and used to personalise pricing,
                 language, notifications, study support, marketplace access, and your dashboard.
               </p>
             </div>

@@ -10,6 +10,6 @@ export async function POST(request: Request) {
   const verified = await verifyAuthCode(body.userId, "MFA", body.code);
   if (!verified) return Response.json({ ok: false, error: "INVALID_MFA_CODE" }, { status: 401 });
   const jar = await cookies();
-  jar.set("unisphere_mfa", "true", { httpOnly: true, sameSite: "lax", secure: process.env.NODE_ENV === "production", path: "/" });
+  jar.set("unicuro_mfa", "true", { httpOnly: true, sameSite: "lax", secure: process.env.NODE_ENV === "production", path: "/" });
   return ok({ status: "VERIFIED" });
 }

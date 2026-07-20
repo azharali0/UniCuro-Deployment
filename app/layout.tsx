@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "UniSphere — Student Life OS",
+  title: "UniCuro — Student Life OS",
   description: "A student operating system for planning, deadlines, timetable and reminders.",
   manifest: "/manifest.json",
 };

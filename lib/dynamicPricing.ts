@@ -31,7 +31,7 @@ export const fallbackRegions = [
 
 export const fallbackPlan = {
   code: "STUDENT_PREMIUM",
-  name: "UniSphere Premium",
+  name: "UniCuro Premium",
   description: "Premium discounts, AI academic support, cashback boosts and career tools.",
   baseCurrency: "USD",
   monthlyUsdCents: 799,

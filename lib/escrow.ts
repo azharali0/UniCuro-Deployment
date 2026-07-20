@@ -36,7 +36,7 @@ export async function createMarketplaceEscrowPayment(input: {
     line_items: [{
       price_data: {
         currency: "gbp",
-        product_data: { name: `UniSphere Marketplace Listing ${input.listingId}` },
+        product_data: { name: `UniCuro Marketplace Listing ${input.listingId}` },
         unit_amount: input.amountPence,
       },
       quantity: 1,

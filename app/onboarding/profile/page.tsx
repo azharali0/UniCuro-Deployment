@@ -17,7 +17,7 @@ export default async function Page() {
       <section className="grid gap-6 lg:grid-cols-[0.8fr_1.2fr]">
         <div className="rounded-3xl border border-slate-200 bg-white p-8">
           <h2 className="text-4xl font-black">Build your profile</h2>
-          <p className="mt-4 leading-8 text-slate-600">Tell UniSphere how you would like to be identified and what you want to achieve.</p>
+          <p className="mt-4 leading-8 text-slate-600">Tell UniCuro how you would like to be identified and what you want to achieve.</p>
         </div>
         <RuntimeOnboardingForm
           stepCode="profile"

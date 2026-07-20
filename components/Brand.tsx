@@ -4,7 +4,7 @@ export function Brand() {
       <div className="grid h-10 w-10 place-items-center rounded-2xl bg-brand-green text-emerald-950 shadow-lg shadow-emerald-200">
         U
       </div>
-      UniSphere
+      UniCuro
     </div>
   );
 }

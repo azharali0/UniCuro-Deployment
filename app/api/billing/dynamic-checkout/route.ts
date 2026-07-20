@@ -4,7 +4,7 @@ import Stripe from "stripe";
 import { z } from "zod";
 import { detectCountryFromHeaders, getDynamicPricing } from "@/lib/dynamicPricing";
 import { prisma } from "@/lib/prisma";
-import { getUniSphereSession } from "@/lib/session";
+import { getUniCuroSession } from "@/lib/session";
 import { validatePromoCode } from "@/lib/promoRedemptions";
 
 const stripe = process.env.STRIPE_SECRET_KEY ? new Stripe(process.env.STRIPE_SECRET_KEY, { apiVersion: "2024-06-20" as any }) : null;
@@ -12,7 +12,7 @@ const schema = z.object({ billingPeriod: z.enum(["monthly", "quarterly", "yearly
 
 export async function POST(request: Request) {
   await recordApiRequest({ endpoint: "/api/billing/dynamic-checkout", method: "POST", status: "REQUEST_RECEIVED" });
-  const user = await getUniSphereSession();
+  const user = await getUniCuroSession();
   if (!user) return NextResponse.json({ ok: false, error: "Unauthenticated" }, { status: 401 });
   if (!stripe) return NextResponse.json({ ok: false, error: "Stripe is not configured" }, { status: 428 });
 

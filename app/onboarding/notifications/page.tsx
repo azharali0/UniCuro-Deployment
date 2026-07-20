@@ -17,7 +17,7 @@ export default async function Page() {
       <section className="grid gap-6 lg:grid-cols-[0.8fr_1.2fr]">
         <div className="rounded-3xl border border-slate-200 bg-white p-8">
           <h2 className="text-4xl font-black">Notification preferences</h2>
-          <p className="mt-4 leading-8 text-slate-600">Choose the channels UniSphere may use for academic, billing, marketplace, security, and wellbeing updates.</p>
+          <p className="mt-4 leading-8 text-slate-600">Choose the channels UniCuro may use for academic, billing, marketplace, security, and wellbeing updates.</p>
         </div>
         <RuntimeOnboardingForm
           stepCode="notifications"

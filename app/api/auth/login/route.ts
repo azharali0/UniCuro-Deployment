@@ -9,7 +9,7 @@ export async function POST(request: Request) {
   const body = schema.parse(await request.json());
   const user = await authenticatePassword(body.email, body.password);
   const jar = await cookies();
-  jar.set("unisphere_user_id", user.id, { httpOnly: true, sameSite: "lax", secure: process.env.NODE_ENV === "production", path: "/" });
-  jar.set("unisphere_role", user.role, { httpOnly: true, sameSite: "lax", secure: process.env.NODE_ENV === "production", path: "/" });
+  jar.set("unicuro_user_id", user.id, { httpOnly: true, sameSite: "lax", secure: process.env.NODE_ENV === "production", path: "/" });
+  jar.set("unicuro_role", user.role, { httpOnly: true, sameSite: "lax", secure: process.env.NODE_ENV === "production", path: "/" });
   return ok({ userId: user.id, role: user.role });
 }

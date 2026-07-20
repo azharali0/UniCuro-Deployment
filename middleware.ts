@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
-import { canRoleAccessPath, isProtectedPath, loginPathFor, requiresMfa, roleHome, UniSphereRole } from "@/lib/access-control";
+import { canRoleAccessPath, isProtectedPath, loginPathFor, requiresMfa, roleHome, UniCuroRole } from "@/lib/access-control";
 
-function getRole(request: NextRequest): UniSphereRole | null {
-  const value = request.cookies.get("unisphere_role")?.value;
+function getRole(request: NextRequest): UniCuroRole | null {
+  const value = request.cookies.get("unicuro_role")?.value;
   if (value === "STUDENT" || value === "MERCHANT" || value === "ADMIN" || value === "SUPER_ADMIN") return value;
   return null;
 }
@@ -22,7 +22,7 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL(roleHome[role], request.url));
   }
 
-  if (requiresMfa(role) && request.cookies.get("unisphere_mfa")?.value !== "true") {
+  if (requiresMfa(role) && request.cookies.get("unicuro_mfa")?.value !== "true") {
     const url = new URL(role === "SUPER_ADMIN" ? "/login/super-admin" : "/login/admin", request.url);
     url.searchParams.set("mfa", "required");
     url.searchParams.set("next", path);

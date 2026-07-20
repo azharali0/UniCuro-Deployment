@@ -18,7 +18,7 @@ export default async function Page() {
       <section className="grid gap-6 lg:grid-cols-[0.8fr_1.2fr]">
         <div className="rounded-3xl border border-slate-200 bg-white p-8">
           <h2 className="text-4xl font-black">Academic setup</h2>
-          <p className="mt-4 leading-8 text-slate-600">Connect your university, course, and year so UniSphere can personalise academic tools and opportunities.</p>
+          <p className="mt-4 leading-8 text-slate-600">Connect your university, course, and year so UniCuro can personalise academic tools and opportunities.</p>
         </div>
         <RuntimeOnboardingForm
           stepCode="education"

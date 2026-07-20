@@ -1,6 +1,6 @@
 {
-  "name": "UniSphere Student OS",
-  "short_name": "UniSphere",
+  "name": "UniCuro Student OS",
+  "short_name": "UniCuro",
   "description": "Student life operating system.",
   "start_url": "/",
   "display": "standalone",

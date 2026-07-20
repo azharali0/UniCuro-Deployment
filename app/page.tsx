@@ -20,7 +20,7 @@ export default async function HomePage() {
     <main className="min-h-screen bg-slate-50 dark:bg-slate-950">
       <section className="mx-auto grid max-w-7xl gap-10 px-6 py-16 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
         <div>
-          <p className="inline-flex rounded-full bg-emerald-100 px-4 py-2 text-sm font-black text-emerald-800">UniSphere Student Operating System</p>
+          <p className="inline-flex rounded-full bg-emerald-100 px-4 py-2 text-sm font-black text-emerald-800">UniCuro Student Operating System</p>
           <h1 className="mt-6 text-5xl font-black tracking-tight text-slate-950 dark:text-white lg:text-7xl">{homepage.heroHeadline}</h1>
           <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600 dark:text-slate-300">{homepage.heroSubheadline}</p>
           <div className="mt-8 flex flex-wrap gap-3">

@@ -14,7 +14,7 @@ export default async function Page() {
       <section className="grid gap-6 lg:grid-cols-[0.8fr_1.2fr]">
         <div className="rounded-3xl border border-slate-200 bg-white p-8">
           <h2 className="text-4xl font-black">Finish setup</h2>
-          <p className="mt-4 leading-8 text-slate-600">Confirm your onboarding. UniSphere will mark your account as ready and open your personalised dashboard.</p>
+          <p className="mt-4 leading-8 text-slate-600">Confirm your onboarding. UniCuro will mark your account as ready and open your personalised dashboard.</p>
         </div>
         <RuntimeOnboardingForm
           stepCode="complete"

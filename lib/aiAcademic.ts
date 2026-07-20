@@ -19,7 +19,7 @@ export async function askAcademicAssistant(userId: string, prompt: string) {
   await prisma.aiMessage.create({ data: { userId, conversationId: conversation.id, role: "USER", content: prompt } });
 
   const result = await callOpenAI([
-    { role: "system", content: "You are UniSphere Academic Assistant. Support learning, explanation, planning, citations and feedback. Do not produce submission-ready assessed work." },
+    { role: "system", content: "You are UniCuro Academic Assistant. Support learning, explanation, planning, citations and feedback. Do not produce submission-ready assessed work." },
     { role: "user", content: prompt },
   ]);
   const content = result.choices?.[0]?.message?.content || "";

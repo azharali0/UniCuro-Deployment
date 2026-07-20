@@ -1,27 +1,27 @@
 import { cookies } from "next/headers";
-import { UniSphereRole } from "./roles";
+import { UniCuroRole } from "./roles";
 
 export type SessionUser = {
   id: string;
   email: string;
-  role: UniSphereRole;
+  role: UniCuroRole;
   mfaVerified?: boolean;
   subscriptionTier?: "FREE" | "PREMIUM";
 };
 
 export async function getSessionUser(): Promise<SessionUser | null> {
   const cookieStore = await cookies();
-  const role = (cookieStore.get("unisphere_role")?.value || "STUDENT") as UniSphereRole;
+  const role = (cookieStore.get("unicuro_role")?.value || "STUDENT") as UniCuroRole;
   return {
-    id: cookieStore.get("unisphere_user_id")?.value || "session-user",
-    email: cookieStore.get("unisphere_email")?.value || "session-user@account",
+    id: cookieStore.get("unicuro_user_id")?.value || "session-user",
+    email: cookieStore.get("unicuro_email")?.value || "session-user@account",
     role,
-    mfaVerified: cookieStore.get("unisphere_mfa")?.value === "true",
-    subscriptionTier: (cookieStore.get("unisphere_tier")?.value || "FREE") as "FREE" | "PREMIUM",
+    mfaVerified: cookieStore.get("unicuro_mfa")?.value === "true",
+    subscriptionTier: (cookieStore.get("unicuro_tier")?.value || "FREE") as "FREE" | "PREMIUM",
   };
 }
 
-export async function requireRole(roles: UniSphereRole[]) {
+export async function requireRole(roles: UniCuroRole[]) {
   const user = await getSessionUser();
   if (!user || !roles.includes(user.role)) throw new Error("UNAUTHORIZED_ROLE");
   return user;

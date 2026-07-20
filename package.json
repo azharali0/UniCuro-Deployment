@@ -108,6 +108,6 @@
     "@types/web-push": "^3.6.4",
     "vitest": "latest"
   },
-  "name": "unisphere-university-pilot-launch-program",
+  "name": "unicuro",
   "version": "1.7.0"
 }

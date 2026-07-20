@@ -32,7 +32,7 @@ export function LandingPage({
             Your university life in one calm command centre.
           </h1>
           <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-500">
-            UniSphere now includes full launch readiness, QA, compliance, deployment certification,
+            UniCuro now includes full launch readiness, QA, compliance, deployment certification,
             investor review KPIs, risk governance and Go/No-Go launch control.
           </p>
           <div className="mt-7 flex flex-wrap gap-3">
