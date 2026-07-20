@@ -8,10 +8,10 @@ export const roleHome: Record<UniSphereRole, string> = {
 };
 
 export const allowedRolePaths: Record<UniSphereRole, string[]> = {
-  STUDENT: ["/student"],
-  MERCHANT: ["/student", "/student/merchant"],
-  ADMIN: ["/admin"],
-  SUPER_ADMIN: ["/super-admin"],
+  STUDENT: ["/student", "/onboarding", "/support"],
+  MERCHANT: ["/student", "/student/merchant", "/onboarding", "/support"],
+  ADMIN: ["/admin", "/support"],
+  SUPER_ADMIN: ["/super-admin", "/support"],
 };
 
 export function canRoleAccessPath(role: UniSphereRole, pathname: string) {
@@ -19,7 +19,7 @@ export function canRoleAccessPath(role: UniSphereRole, pathname: string) {
 }
 
 export function isProtectedPath(pathname: string) {
-  return pathname.startsWith("/student") || pathname.startsWith("/admin") || pathname.startsWith("/super-admin");
+  return pathname.startsWith("/student") || pathname.startsWith("/admin") || pathname.startsWith("/super-admin") || pathname.startsWith("/onboarding") || pathname.startsWith("/support");
 }
 
 export function loginPathFor(pathname: string) {

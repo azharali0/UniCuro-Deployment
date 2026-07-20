@@ -35,4 +35,4 @@ export function middleware(request: NextRequest) {
   return res;
 }
 
-export const config = { matcher: ["/onboarding/:path*", "/student/:path*", "/admin/:path*", "/super-admin/:path*"] };
+export const config = { matcher: ["/onboarding/:path*", "/student/:path*", "/admin/:path*", "/super-admin/:path*", "/support/:path*"] };
