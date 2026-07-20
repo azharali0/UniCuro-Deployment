@@ -1,7 +1,7 @@
 {
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "prisma generate && next build",
     "start": "next start",
     "lint": "next lint",
     "db:generate": "prisma generate",
@@ -71,7 +71,8 @@
     "v1:intelligence:audit": "node scripts/v1-intelligence-audit.js",
     "v1:intelligence:summary": "node scripts/v1-intelligence-summary.js",
     "remediation:required:audit": "node scripts/required-remediation-audit.js",
-    "remediation:required:summary": "node scripts/required-remediation-summary.js"
+    "remediation:required:summary": "node scripts/required-remediation-summary.js",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@prisma/client": "^5.22.0",
