@@ -1,4 +1,4 @@
-const CACHE_NAME = "unisphere-priority-16-v1";
+const CACHE_NAME = "unicuro-priority-16-v1";
 const APP_SHELL = [
   "/",
   "/manifest.json"
@@ -41,7 +41,7 @@ self.addEventListener("fetch", (event) => {
 });
 
 self.addEventListener("push", (event) => {
-  const data = event.data ? event.data.json() : { title: "UniSphere", body: "You have a new update." };
+  const data = event.data ? event.data.json() : { title: "UniCuro", body: "You have a new update." };
 
   event.waitUntil(
     self.registration.showNotification(data.title, {
@@ -59,7 +59,7 @@ self.addEventListener("notificationclick", (event) => {
 });
 
 self.addEventListener("sync", (event) => {
-  if (event.tag === "unisphere-background-sync") {
+  if (event.tag === "unicuro-background-sync") {
     event.waitUntil(Promise.resolve());
   }
 });

@@ -1,10 +1,19 @@
 import type { Metadata, Viewport } from "next";
+import { PwaRegister } from "@/components/PwaRegister";
 import "./globals.css";
 
 export const metadata: Metadata = {
   title: "UniCuro — Student Life OS",
   description: "A student operating system for planning, deadlines, timetable and reminders.",
   manifest: "/manifest.json",
+  appleWebApp: {
+    capable: true,
+    title: "UniCuro",
+    statusBarStyle: "default",
+  },
+  formatDetection: {
+    telephone: false,
+  },
 };
 
 export const viewport: Viewport = {
@@ -20,7 +29,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <PwaRegister />
+        {children}
+      </body>
     </html>
   );
 }
