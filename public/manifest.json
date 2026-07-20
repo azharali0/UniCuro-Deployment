@@ -1,0 +1,17 @@
+{
+  "name": "UniSphere Student OS",
+  "short_name": "UniSphere",
+  "description": "Student life operating system.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F8FAFC",
+  "theme_color": "#22C55E",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
