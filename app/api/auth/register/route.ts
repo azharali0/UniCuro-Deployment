@@ -1,14 +1,36 @@
 import { z } from "zod";
 import { recordApiRequest } from "@/lib/apiDatabase";
-import { registerUser, createAuthCode } from "@/lib/authEngine";
-import { sendEmail } from "@/lib/emailProvider";
-import { ok } from "@/lib/http";
-const schema = z.object({ email: z.string().email(), password: z.string().min(10), role: z.enum(["STUDENT","MERCHANT"]), phoneNumber: z.string().optional() });
+import { prisma } from "@/lib/prisma";
+import bcrypt from "bcryptjs";
+import { NextResponse } from "next/server";
+
+const schema = z.object({ email: z.string().email(), password: z.string().min(6), name: z.string().min(1), role: z.enum(["STUDENT","ADMIN","MERCHANT"]) });
 export async function POST(request: Request) {
   await recordApiRequest({ endpoint: "/api/auth/register", method: "POST", status: "REQUEST_RECEIVED" });
   const body = schema.parse(await request.json());
-  const user = await registerUser(body);
-  const { code } = await createAuthCode(user.id, "EMAIL_VERIFICATION");
-  await sendEmail({ userId: user.id, to: user.email, subject: "Verify your UniCuro account", html: `<p>Your verification code is <strong>${code}</strong>.</p>`, templateKey: "EMAIL_VERIFICATION" });
-  return ok({ userId: user.id }, { status: 201 });
+  // Check if user already exists
+  const existing = await prisma.user.findUnique({ where: { email: body.email } });
+  if (existing) {
+    return NextResponse.json({ ok: false, error: "Email already in use" }, { status: 400 });
+  }
+
+  const password = await bcrypt.hash(body.password, 10);
+  
+  // Create user
+  const user = await prisma.user.create({
+    data: {
+      email: body.email,
+      password: password,
+      name: body.name,
+      role: body.role,
+    }
+  });
+
+  // Automatically log them in by setting cookies
+  const res = NextResponse.json({ ok: true, redirectTo: "/onboarding" });
+  res.cookies.set("unicuro_role", user.role, { httpOnly: true, sameSite: "lax", path: "/" });
+  res.cookies.set("unicuro_email", user.email, { httpOnly: true, sameSite: "lax", path: "/" });
+  res.cookies.set("unicuro_user_id", user.id, { httpOnly: true, sameSite: "lax", path: "/" });
+  res.cookies.set("unicuro_mfa", "false", { httpOnly: true, sameSite: "lax", path: "/" });
+  return res;
 }

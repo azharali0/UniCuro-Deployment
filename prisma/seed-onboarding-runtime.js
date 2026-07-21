@@ -55,7 +55,7 @@ async function main() {
         sortOrder: index + 1,
         required: true,
         active: true,
-        fieldSchema: fields,
+
       },
       create: {
         flowId: flow.id,
@@ -66,7 +66,7 @@ async function main() {
         sortOrder: index + 1,
         required: true,
         active: true,
-        fieldSchema: fields,
+
       },
     });
   }
