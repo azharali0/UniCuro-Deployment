@@ -7,7 +7,6 @@ const PROFILE_FIELDS = new Set([
   "countryCode",
   "languageCode",
   "currencyCode",
-  "timezone",
   "universityName",
   "courseName",
   "yearOfStudy",

@@ -24,6 +24,19 @@ const options = [
   ["ai_support_level", "LIGHT", "Light guidance", 1],
   ["ai_support_level", "BALANCED", "Balanced support", 2],
   ["ai_support_level", "INTENSIVE", "Intensive revision support", 3],
+  ["universities", "oxford", "University of Oxford", 1],
+  ["universities", "cambridge", "University of Cambridge", 2],
+  ["universities", "imperial", "Imperial College London", 3],
+  ["universities", "ucl", "University College London", 4],
+  ["universities", "lse", "London School of Economics", 5],
+  ["universities", "edinburgh", "University of Edinburgh", 6],
+  ["countries", "GB", "United Kingdom", 1],
+  ["countries", "US", "United States", 2],
+  ["countries", "AU", "Australia", 3],
+  ["countries", "CA", "Canada", 4],
+  ["timezones", "Europe/London", "Europe/London (GMT)", 1],
+  ["timezones", "America/New_York", "America/New_York (EST)", 2],
+  ["timezones", "Australia/Sydney", "Australia/Sydney (AEST)", 3],
 ];
 
 async function main() {
@@ -79,43 +92,7 @@ async function main() {
     });
   }
 
-  const countries = await prisma.studentCountryProfile.findMany({ where: { active: true } });
-  for (const [index, country] of countries.entries()) {
-    await prisma.onboardingOption.upsert({
-      where: { category_value: { category: "country", value: country.countryCode } },
-      update: { label: country.countryName, sortOrder: index + 1, active: true },
-      create: { category: "country", value: country.countryCode, label: country.countryName, sortOrder: index + 1, active: true },
-    });
-
-    await prisma.onboardingOption.upsert({
-      where: { category_value: { category: "currency", value: country.currencyCode } },
-      update: { label: country.currencyCode, active: true },
-      create: { category: "currency", value: country.currencyCode, label: country.currencyCode, active: true },
-    });
-
-    for (const languageCode of country.languageCodes) {
-      await prisma.onboardingOption.upsert({
-        where: { category_value: { category: "language", value: languageCode } },
-        update: { label: languageCode.toUpperCase(), active: true },
-        create: { category: "language", value: languageCode, label: languageCode.toUpperCase(), active: true },
-      });
-    }
-  }
-
-  const timezones = await prisma.onboardingOption.findMany({ where: { category: "timezone" } });
-  if (!timezones.length) {
-    for (const [index, timezone] of Intl.supportedValuesOf("timeZone").entries()) {
-      await prisma.onboardingOption.create({
-        data: {
-          category: "timezone",
-          value: timezone,
-          label: timezone,
-          sortOrder: index + 1,
-          active: true,
-        },
-      });
-    }
-  }
+  // Replaced dynamic country and timezone fetching with hardcoded demo data in options array above
 }
 
 main().finally(() => prisma.$disconnect());

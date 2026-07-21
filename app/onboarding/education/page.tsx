@@ -8,7 +8,7 @@ export default async function Page() {
   const user = await requireRole(["STUDENT", "MERCHANT"]);
   const state = await getOnboardingState(user.id);
   const fields = [
-      { name: "universityId", label: "University", type: "select", required: true, defaultValue: (state.profile as any).universityId, options: await listOnboardingOptions("universities") },
+      { name: "universityName", label: "University", type: "select", required: true, defaultValue: (state.profile as any).universityName, options: await listOnboardingOptions("universities") },
       { name: "course", label: "Course Name", type: "text", required: true, defaultValue: (state.profile as any).course },
       { name: "yearOfStudy", label: "Year of study", type: "select", required: true, defaultValue: state.profile.yearOfStudy, options: (await listOnboardingOptions("year_of_study")).map((o) => ({ value: o.value, label: o.label })) },
     ] as any;
