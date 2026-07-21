@@ -18,6 +18,14 @@ export default async function HomePage() {
 
   return (
     <main className="min-h-screen bg-slate-50 dark:bg-slate-950">
+      <header className="flex items-center justify-between px-6 py-4 border-b bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800">
+        <div className="font-black text-xl text-emerald-600">UniCuro</div>
+        <div className="flex items-center gap-3">
+          <Link href="/login/admin" className="text-sm font-bold text-slate-500 hover:text-slate-800 mr-4">Admin</Link>
+          <Link href="/login/student" className="rounded-xl border border-slate-200 px-4 py-2 text-sm font-black hover:bg-slate-50 text-slate-900">Login</Link>
+          <Link href="/register" className="rounded-xl bg-emerald-500 px-4 py-2 text-sm font-black text-emerald-950 hover:bg-emerald-400">Sign up</Link>
+        </div>
+      </header>
       <section className="mx-auto grid max-w-7xl gap-10 px-6 py-16 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
         <div>
           <p className="inline-flex rounded-full bg-emerald-100 px-4 py-2 text-sm font-black text-emerald-800">UniCuro Student Operating System</p>
