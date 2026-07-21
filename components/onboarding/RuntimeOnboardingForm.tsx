@@ -29,6 +29,7 @@ export function RuntimeOnboardingForm({
   const router = useRouter();
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
+  const [invalidFields, setInvalidFields] = useState<string[]>([]);
 
   const initialValues = useMemo(() => {
     return Object.fromEntries(
@@ -39,14 +40,28 @@ export function RuntimeOnboardingForm({
   async function submit(formData: FormData) {
     setSaving(true);
     setError("");
+    setInvalidFields([]);
 
     const payload: Record<string, string | boolean | number | null> = {};
+    const missing: string[] = [];
+
     for (const field of fields) {
       if (field.type === "checkbox") {
         payload[field.name] = formData.get(field.name) === "on";
       } else {
-        payload[field.name] = String(formData.get(field.name) || "");
+        const val = String(formData.get(field.name) || "").trim();
+        if (field.required && !val) {
+          missing.push(field.name);
+        }
+        payload[field.name] = val;
       }
+    }
+
+    if (missing.length > 0) {
+      setInvalidFields(missing);
+      setError("Please fill in all required fields highlighted in red.");
+      setSaving(false);
+      return;
     }
 
     try {
@@ -60,7 +75,11 @@ export function RuntimeOnboardingForm({
       setSaving(false);
 
       if (!result.ok) {
-        setError(result.error || "Unable to save this onboarding step.");
+        if (result.error === "ONBOARDING_SEQUENCE_VIOLATION") {
+          setError("Please complete the previous steps first.");
+        } else {
+          setError(result.error || "Unable to save this onboarding step.");
+        }
         return;
       }
 
@@ -87,14 +106,22 @@ export function RuntimeOnboardingForm({
                 name={field.name}
                 required={field.required}
                 defaultValue={String(initialValues[field.name] || "")}
-                className="min-h-32 rounded-2xl border border-slate-300 p-4"
+                className={`min-h-32 rounded-2xl border p-4 focus:outline-none focus:ring-2 ${
+                  invalidFields.includes(field.name)
+                    ? "border-red-500 bg-red-50 ring-red-200"
+                    : "border-slate-300 focus:ring-emerald-200"
+                }`}
               />
             ) : field.type === "select" ? (
               <select
                 name={field.name}
                 required={field.required}
                 defaultValue={String(initialValues[field.name] || "")}
-                className="rounded-2xl border border-slate-300 p-4"
+                className={`rounded-2xl border p-4 focus:outline-none focus:ring-2 ${
+                  invalidFields.includes(field.name)
+                    ? "border-red-500 bg-red-50 ring-red-200 text-red-900"
+                    : "border-slate-300 focus:ring-emerald-200"
+                }`}
               >
                 <option value="">Select an option</option>
                 {(field.options || []).map((option) => (
@@ -115,7 +142,11 @@ export function RuntimeOnboardingForm({
                 name={field.name}
                 required={field.required}
                 defaultValue={String(initialValues[field.name] || "")}
-                className="rounded-2xl border border-slate-300 p-4"
+                className={`rounded-2xl border p-4 focus:outline-none focus:ring-2 ${
+                  invalidFields.includes(field.name)
+                    ? "border-red-500 bg-red-50 ring-red-200 placeholder-red-300"
+                    : "border-slate-300 focus:ring-emerald-200"
+                }`}
               />
             )}
           </label>
