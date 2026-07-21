@@ -49,22 +49,27 @@ export function RuntimeOnboardingForm({
       }
     }
 
-    const response = await fetch("/api/onboarding/step", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ stepCode, payload }),
-    });
+    try {
+      const response = await fetch("/api/onboarding/step", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ stepCode, payload }),
+      });
 
-    const result = await response.json();
-    setSaving(false);
+      const result = await response.json();
+      setSaving(false);
 
-    if (!result.ok) {
-      setError(result.error || "Unable to save this onboarding step.");
-      return;
+      if (!result.ok) {
+        setError(result.error || "Unable to save this onboarding step.");
+        return;
+      }
+
+      router.push(result.nextRoute || "/student");
+      router.refresh();
+    } catch (err) {
+      setSaving(false);
+      setError("An unexpected network error occurred.");
     }
-
-    router.push(result.nextRoute || "/student");
-    router.refresh();
   }
 
   return (
