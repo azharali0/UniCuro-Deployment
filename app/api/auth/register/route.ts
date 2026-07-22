@@ -8,8 +8,9 @@ const schema = z.object({ email: z.string().email(), password: z.string().min(6)
 export async function POST(request: Request) {
   await recordApiRequest({ endpoint: "/api/auth/register", method: "POST", status: "REQUEST_RECEIVED" });
   const body = schema.parse(await request.json());
+  const emailLower = body.email.toLowerCase();
   // Check if user already exists
-  const existing = await prisma.user.findUnique({ where: { email: body.email } });
+  const existing = await prisma.user.findUnique({ where: { email: emailLower } });
   if (existing) {
     return NextResponse.json({ ok: false, error: "Email already in use" }, { status: 400 });
   }
@@ -19,7 +20,7 @@ export async function POST(request: Request) {
   // Create user
   const user = await prisma.user.create({
     data: {
-      email: body.email,
+      email: emailLower,
       password: password,
       name: body.name,
       role: body.role,

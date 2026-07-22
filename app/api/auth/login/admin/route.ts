@@ -15,7 +15,8 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: false, error: "Invalid 6-digit MFA code" }, { status: 401 });
   }
 
-  const user = await prisma.user.findUnique({ where: { email: data.email } });
+  const emailLower = data.email.toLowerCase();
+  const user = await prisma.user.findUnique({ where: { email: emailLower } });
   if (!user || user.role !== "ADMIN" || !user.password) {
     return NextResponse.json({ ok: false, error: "Invalid email or password" }, { status: 401 });
   }
@@ -29,7 +30,7 @@ export async function POST(request: Request) {
   const redirectTo = canRoleAccessPath("ADMIN" as any, requested) ? requested : "/admin";
   const res = NextResponse.json({ ok: true, role: "ADMIN", redirectTo });
   res.cookies.set("unicuro_role", "ADMIN", { httpOnly: true, sameSite: "lax", path: "/" });
-  res.cookies.set("unicuro_email", data.email, { httpOnly: true, sameSite: "lax", path: "/" });
+  res.cookies.set("unicuro_email", emailLower, { httpOnly: true, sameSite: "lax", path: "/" });
   res.cookies.set("unicuro_user_id", user.id, { httpOnly: true, sameSite: "lax", path: "/" });
   res.cookies.set("unicuro_mfa", "true", { httpOnly: true, sameSite: "lax", path: "/" });
   return res;
