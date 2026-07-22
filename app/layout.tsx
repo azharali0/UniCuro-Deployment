@@ -3,7 +3,7 @@ import { PwaRegister } from "@/components/PwaRegister";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "UniCuro - Student Life OS",
+  title: "UniCuro | Student Life OS",
   description: "A student operating system for planning, deadlines, timetable and reminders.",
   manifest: "/manifest.json",
   appleWebApp: {
