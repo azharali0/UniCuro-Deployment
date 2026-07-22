@@ -21,8 +21,7 @@ export default async function HomePage() {
       <header className="mx-auto flex max-w-7xl items-center justify-between px-6 py-6">
         <div className="text-2xl font-black text-emerald-600">UniCuro</div>
         <div className="flex items-center gap-4">
-          <Link href="/login/admin" className="text-sm font-bold text-slate-600 hover:text-emerald-600 dark:text-slate-300">Admin Login</Link>
-          <Link href="/login/student" className="rounded-xl bg-emerald-600 px-5 py-2.5 text-sm font-bold text-white hover:bg-emerald-700">Login / Sign Up</Link>
+          <Link href="/login" className="rounded-xl bg-emerald-600 px-5 py-2.5 text-sm font-bold text-white hover:bg-emerald-700">Login / Sign Up</Link>
         </div>
       </header>
 
